@@ -2,7 +2,7 @@
   openapi: "3.0.0"
   info: 
     version: "1.0"
-    title: "Avantation REST Template"
+    title: "Petstore API"
     description: "TODO: Add Description"
   servers: 
     - 
@@ -121,9 +121,7 @@
                       phone: 
                         type: "string"
                       userStatus: 
-                        type: 
-                          - "number"
-                          - "string"
+                        type: "string"
                       username: 
                         type: "string"
                     required: 
@@ -372,7 +370,7 @@
               application/json: 
                 schema: 
                   title: " 11:51:00 up 19 min,  0 users,  load average: 0.01, 0.05, 0.02\n"
-                  type: "undefined"
+                  type: "string"
                 example: " 11:51:00 up 19 min,  0 users,  load average: 0.01, 0.05, 0.02\n"
           default: 
             description: "Unexpected error"
