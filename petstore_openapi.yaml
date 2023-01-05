@@ -1,0 +1,382 @@
+---
+  openapi: "3.0.0"
+  info: 
+    version: "1.0"
+    title: "Avantation REST Template"
+    description: "TODO: Add Description"
+  servers: 
+    - 
+      url: "{scheme}://petstoreapi.aabutler.vuln.sa.veracode.io:5000/{basePath}"
+      variables: 
+        scheme: 
+          enum: 
+            - "https"
+            - "http"
+          default: "http"
+        basePath: 
+          default: ""
+  tags: 
+    - 
+      name: "api"
+    - 
+      name: "admin"
+  components: 
+    schemas: 
+      ErrorModel: 
+        type: "object"
+        properties: 
+          code: 
+            type: "string"
+    securitySchemes: 
+      JWT: 
+        description: "You can create a JSON Web Token (JWT) during auth.\nUsage format: `Bearer <JWT>`\n"
+        name: "Authorization"
+        type: "apiKey"
+        in: "header"
+  paths: 
+    /api/v1/user: 
+      post: 
+        security: 
+          - 
+            JWT: []
+        tags: 
+          - "api"
+        summary: "api"
+        parameters: []
+        requestBody: 
+          required: true
+          content: 
+            application/json: 
+              schema: 
+                type: "object"
+                properties: 
+                  username: 
+                    type: "string"
+                  firstname: 
+                    type: "string"
+                  lastname: 
+                    type: "string"
+                  email: 
+                    type: "string"
+                  password: 
+                    type: "string"
+                  phone: 
+                    type: "string"
+              example: 
+                username: "aaa"
+                firstname: "Davey"
+                lastname: "Crocket"
+                email: "dcrocket@veracode.com"
+                password: "password123"
+                phone: "777.555.1212"
+        responses: 
+          201: 
+            description: "CREATED"
+            content: 
+              application/json: 
+                schema: 
+                  type: "object"
+                  properties: 
+                    id: 
+                      type: "number"
+                    message: 
+                      type: "string"
+                example: 
+                  id: 5
+                  message: "User added successfully!"
+          default: 
+            description: "Unexpected error"
+            content: 
+              application/json: 
+                example: 
+                  message: "Sorry unable to perform operation."
+      get: 
+        security: 
+          - 
+            JWT: []
+        tags: 
+          - "api"
+        summary: "api"
+        parameters: []
+        responses: 
+          200: 
+            description: "OK"
+            content: 
+              application/json: 
+                schema: 
+                  type: "array"
+                  items: 
+                    type: "object"
+                    properties: 
+                      email: 
+                        type: "string"
+                      firstname: 
+                        type: "string"
+                      id: 
+                        type: "number"
+                      lastname: 
+                        type: "string"
+                      password: 
+                        type: "string"
+                      phone: 
+                        type: "string"
+                      userStatus: 
+                        type: 
+                          - "number"
+                          - "string"
+                      username: 
+                        type: "string"
+                    required: 
+                      - "email"
+                      - "firstname"
+                      - "id"
+                      - "lastname"
+                      - "password"
+                      - "phone"
+                      - "userStatus"
+                      - "username"
+                example: 
+                  - 
+                    email: "dcrocket@veracode.com"
+                    firstname: "davey"
+                    id: 1
+                    lastname: "Crocket"
+                    password: "password123"
+                    phone: "777.555.1212"
+                    userStatus: 1
+                    username: "weld_pond"
+                  - 
+                    email: "dcrocket@veracode.com"
+                    firstname: "Davey"
+                    id: 5
+                    lastname: "Crocket"
+                    password: "password123"
+                    phone: "777.555.1212"
+                    userStatus: null
+                    username: "aaa"
+          default: 
+            description: "Unexpected error"
+            content: 
+              application/json: 
+                example: 
+                  message: "Sorry unable to perform operation."
+    /api/v1/user/login: 
+      post: 
+        security: 
+          - 
+            JWT: []
+        tags: 
+          - "api"
+        summary: "api"
+        parameters: []
+        requestBody: 
+          required: true
+          content: 
+            application/json: 
+              schema: 
+                type: "object"
+                properties: 
+                  username: 
+                    type: "string"
+                  password: 
+                    type: "string"
+              example: 
+                username: "aaa"
+                password: "password123"
+        responses: 
+          201: 
+            description: "CREATED"
+            content: 
+              application/json: 
+                schema: 
+                  type: "object"
+                  properties: 
+                    access_token: 
+                      type: "string"
+                    message: 
+                      type: "string"
+                example: 
+                  access_token: "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJmcmVzaCI6dHJ1ZSwiaWF0IjoxNjM0ODQyMjQ0LCJqdGkiOiJhYTU2OTMxNS0yZTAxLTQyYjctOWM1Yy02ZTA2YTY2NGJmYTgiLCJ0eXBlIjoiYWNjZXNzIiwic3ViIjoiYWFhIiwibmJmIjoxNjM0ODQyMjQ0fQ.NBb9K1OJjB6iISvTq9hxff5C2o-WPvR50gZym7D6GqQ"
+                  message: "Login Succeeded!"
+          default: 
+            description: "Unexpected error"
+            content: 
+              application/json: 
+                example: 
+                  message: "Sorry unable to perform operation."
+    /api/v1/user/aaa: 
+      put: 
+        security: 
+          - 
+            JWT: []
+        tags: 
+          - "api"
+        summary: "api"
+        parameters: []
+        requestBody: 
+          required: true
+          content: 
+            application/json: 
+              schema: 
+                type: "object"
+                properties: 
+                  firstname: 
+                    type: "string"
+                  lastname: 
+                    type: "string"
+                  email: 
+                    type: "string"
+                  password: 
+                    type: "string"
+                  phone: 
+                    type: "string"
+              example: 
+                firstname: "davey"
+                lastname: "Crocket"
+                email: "dcrockett22222@veracode.com"
+                password: "password123"
+                phone: "777.555.1212"
+        responses: 
+          200: 
+            description: "OK"
+            content: 
+              application/json: 
+                schema: 
+                  type: "object"
+                  properties: 
+                    message: 
+                      type: "string"
+                example: 
+                  message: "User updated successfully!"
+          default: 
+            description: "Unexpected error"
+            content: 
+              application/json: 
+                example: 
+                  message: "Sorry unable to perform operation."
+      delete: 
+        security: 
+          - 
+            JWT: []
+        tags: 
+          - "api"
+        summary: "api"
+        parameters: []
+        responses: 
+          200: 
+            description: "OK"
+            content: 
+              application/json: 
+                schema: 
+                  type: "object"
+                  properties: 
+                    message: 
+                      type: "string"
+                example: 
+                  message: "User deleted successfully"
+          default: 
+            description: "Unexpected error"
+            content: 
+              application/json: 
+                example: 
+                  message: "Sorry unable to perform operation."
+      get: 
+        security: 
+          - 
+            JWT: []
+        tags: 
+          - "api"
+        summary: "api"
+        parameters: []
+        requestBody: 
+          required: true
+          content: 
+            application/json: 
+              schema: 
+                type: "array"
+                items: 
+                  type: "object"
+                  properties: 
+                    username: 
+                      type: "string"
+                    firstname: 
+                      type: "string"
+                    lastname: 
+                      type: "string"
+                    email: 
+                      type: "string"
+                    password: 
+                      type: "string"
+                    phone: 
+                      type: "string"
+              example: 
+                - 
+                  username: "bobby"
+                  firstname: "bobby"
+                  lastname: "walker"
+                  email: "bobby@veracode.com"
+                  password: "password123"
+                  phone: "777.555.1212"
+        responses: 
+          200: 
+            description: "OK"
+            content: 
+              application/json: 
+                schema: 
+                  type: "object"
+                  properties: 
+                    email: 
+                      type: "string"
+                    firstname: 
+                      type: "string"
+                    id: 
+                      type: "number"
+                    lastname: 
+                      type: "string"
+                    password: 
+                      type: "string"
+                    phone: 
+                      type: "string"
+                    userStatus: 
+                      type: "string"
+                    username: 
+                      type: "string"
+                example: 
+                  email: "dcrocket@veracode.com"
+                  firstname: "Davey"
+                  id: 5
+                  lastname: "Crocket"
+                  password: "password123"
+                  phone: "777.555.1212"
+                  userStatus: null
+                  username: "aaa"
+          default: 
+            description: "Unexpected error"
+            content: 
+              application/json: 
+                example: 
+                  message: "Sorry unable to perform operation."
+    /admin/run/uptime: 
+      get: 
+        security: 
+          - 
+            JWT: []
+        tags: 
+          - "admin"
+        summary: "admin"
+        parameters: []
+        responses: 
+          200: 
+            description: "OK"
+            content: 
+              application/json: 
+                schema: 
+                  title: " 11:51:00 up 19 min,  0 users,  load average: 0.01, 0.05, 0.02\n"
+                  type: "undefined"
+                example: " 11:51:00 up 19 min,  0 users,  load average: 0.01, 0.05, 0.02\n"
+          default: 
+            description: "Unexpected error"
+            content: 
+              application/json: 
+                example: 
+                  message: "Sorry unable to perform operation."
